@@ -18,61 +18,70 @@ namespace ConsoleApp3
             Stamotologiya.doctors.Add(new Doctor("Kelce", "Kelewov", 5));
             start();
         }
-        static void FixWorkHours(int Id)
+        static void FixWorkHours()
         {
-            dynamic itemm;
+            foreach (var item in Pediatriya.doctors)
+                item.show();
+            foreach (var item in Travmatologiya.doctors)
+                item.show();
+            foreach (var item in Stamotologiya.doctors)
+                item.show();
+
+            Console.Write("enter doctor Id ");
+            int Id = int.Parse(Console.ReadLine());
+            Doctor doctor = new();
             foreach (var item in Pediatriya.doctors)
             {
-                if (Id == item.Id)
-                    itemm = item;
+                if (item.Id == Id)
+                    doctor = item;
             }
             foreach (var item in Travmatologiya.doctors)
             {
-                if (Id == item.Id)
-                    itemm = item;
+                if (item.Id == Id)
+                    doctor = item;
             }
             foreach (var item in Stamotologiya.doctors)
             {
-                if (Id == item.Id)
-                    itemm = item;
+                if (item.Id == Id)
+                    doctor = item;
             }
             Console.Write("1 - 09 : 00 - 12 : 00\n2 - 13 : 00 - 15 : 00\n3 - 17 : 00 - 19 : 00\nenter choice: ");
             int choice = int.Parse(Console.ReadLine());
             if (choice == 1)
             {
-                if (itemm.Morning.Name != default)
+                if (doctor.WorkHours.Morning.Name != default)
                 {
                     Console.WriteLine("is full");
                     Thread.Sleep(1000);
                     FixWorkHours();
                 }
-                Doctor.WorkHours.Morning = new Patient(patient);
+                doctor.WorkHours.Morning= new Patient(patient);
                 Console.WriteLine("added");
                 Thread.Sleep(1000);
                 start();
             }
             else if (choice == 2)
             {
-                if (Doctor.WorkHours.Morning.Name != default)
+                if (doctor.WorkHours.Afternon.Name != default)
                 {
                     Console.WriteLine("is full");
                     Thread.Sleep(1000);
                     FixWorkHours();
                 }
-                Doctor.WorkHours.Afternon = new Patient(patient);
+                doctor.WorkHours.Afternon = new Patient(patient);
                 Console.WriteLine("added");
                 Thread.Sleep(1000);
                 start();
             }
             else if (choice == 3)
             {
-                if (Doctor.WorkHours.Morning.Name != default)
+                if (doctor.WorkHours.Evening.Name != default)
                 {
                     Console.WriteLine("is full");
                     Thread.Sleep(1000);
                     FixWorkHours();
                 }
-                Doctor.WorkHours.Evening = new Patient(patient);
+                doctor.WorkHours.Evening = new Patient(patient);
                 Console.WriteLine("added");
                 Thread.Sleep(1000);
                 start();
@@ -86,16 +95,8 @@ namespace ConsoleApp3
             patient.Surname = Console.ReadLine();
             Console.Write("enter gmail: ");
             patient.Gmail = Console.ReadLine();
-            foreach (var item in Pediatriya.doctors)
-                item.show();
-            foreach (var item in Travmatologiya.doctors)
-                item.show();
-            foreach (var item in Stamotologiya.doctors)
-                item.show();
-            
-            Console.Write("enter doctor Id ");
-            int Id = int.Parse(Console.ReadLine());
-            FixWorkHours(Id);
+          
+            FixWorkHours();
             start();
 
 
